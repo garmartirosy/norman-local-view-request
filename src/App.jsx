@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [zipCode, setZipCode] = useState("");
 
-  const updateZipHash = () => {
-    window.location.hash = `zip=${zipCode}`;
-    // You would also trigger the API call here
+  const updateZipHash = async () => {
+    window.location.hash = `${zipCode}`;
+
+    try {
+      const response = await axios.get(
+        `https://seeclickfix.com/api/v2/issues?search[place_url]=${zipCode}`
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -16,20 +25,15 @@ function App() {
       <input
         type="text"
         id="zipCode"
-        name="zipCode"
         value={zipCode}
         onChange={(e) => setZipCode(e.target.value)}
-        className="w-full p-2 mb-2 border border-gray-300"
+        style={{
+          border: "1px solid black",
+          padding: "10px",
+          marginBottom: "10px",
+        }} // 添加这一行
       />
-      <button
-        onClick={updateZipHash}
-        className="p-2 bg-blue-500 text-white cursor-pointer"
-      >
-        Update
-      </button>
-      <div id="requestList" className="mt-5">
-        {/* Requests would be listed here */}
-      </div>
+      <button onClick={updateZipHash}>Search</button>
     </div>
   );
 }
