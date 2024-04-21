@@ -12,8 +12,8 @@ function App() {
       const response = await axios.get(
         `https://seeclickfix.com/api/v2/issues?search[place_url]=${zipCode}&per_page=10`
       );
-      setIssues(response.data.issues);
-      console.log(response.data.issues); 
+      console.log(response.data.issues); // 打印响应数据来查看其结构
+      setIssues(response.data.issues); // 根据响应数据的结构来访问问题数组
     } catch (error) {
       console.error(error);
     }
@@ -43,6 +43,7 @@ function App() {
         id="zipCode"
         value={zipCode}
         onChange={(e) => setZipCode(e.target.value)}
+        maxLength={5}
         style={{
           border: "1px solid black",
           padding: "10px",
@@ -54,10 +55,11 @@ function App() {
         <div key={issue.id}>
           <h2>{issue.summary}</h2>
           <p>{issue.description}</p>
+          <p>{issue.address}</p> 
           <a href={issue.html_url} target="_blank" rel="noopener noreferrer">
             View Details
-          </a>{" "}
-          // 添加这一行
+          </a>
+          {issue.media_url && <img src={issue.media_url} alt={issue.summary} />}
         </div>
       ))}
     </div>
