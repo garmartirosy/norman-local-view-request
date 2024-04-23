@@ -4,8 +4,8 @@ Run initially to install all. Short for: npm install [package]
 
     npm i
 
-This will start a new port number each time you run it.
-You can use ctrl-C to quit first on macs.
+This will start a new port number each time you run it.  
+Or use ctrl-C to quit first to retain port 5173.
 
     npm run dev
 
