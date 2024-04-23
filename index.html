@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="text/javascript" src="https://model.earth/localsite/js/localsite.js?showheader=true"></script>
     <base href="." target="_blank">
-    <title>Vite + React</title>
+    <title>Projects and Requests (Vite + React)</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Ractivate after preventing localsite.js from loading twice.
+      // Also send README.md and/or test.md file to dist.
+      //loadMarkdown("README.md", "readmeDiv", "_parent");
+    </script>
+    <div class="content contentpadding" style="padding-top:50px;"></div>
+      <div id="root"></div>
+      <script type="module" src="/src/main.jsx"></script>
+      <div id="readmeDiv"></div>
+    </div>
   </body>
 </html>
