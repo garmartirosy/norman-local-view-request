@@ -12,8 +12,8 @@ function App() {
       const response = await axios.get(
         `https://seeclickfix.com/api/v2/issues?search[place_url]=${zipCode}&per_page=10`
       );
-      console.log(response.data.issues); // 打印响应数据来查看其结构
-      setIssues(response.data.issues); // 根据响应数据的结构来访问问题数组
+      console.log(response.data.issues); 
+      setIssues(response.data.issues); 
     } catch (error) {
       console.error(error);
     }
@@ -44,19 +44,24 @@ function App() {
         value={zipCode}
         onChange={(e) => setZipCode(e.target.value)}
         maxLength={5}
-        style={{
-          border: "1px solid black",
-          padding: "10px",
-          marginBottom: "10px",
-        }}
+        className="border-black border-2 p-2 mb-2" 
       />
-      <button onClick={updateZipHash}>Search</button>
+      <button onClick={updateZipHash} className="bg-blue-500 text-white p-2">
+        Search
+      </button>
       {issues.map((issue) => (
-        <div key={issue.id}>
-          <h2>{issue.summary}</h2>
-          <p>{issue.description}</p>
-          <p>{issue.address}</p> 
-          <a href={issue.html_url} target="_blank" rel="noopener noreferrer">
+        <div key={issue.id} className="py-2">
+          {" "}
+          
+          <h2 className="py-2">{issue.summary}</h2> 
+          <p className="py-2">{issue.description}</p> 
+          <p className="py-2">{issue.address}</p> 
+          <a
+            href={issue.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-blue-500 border-2 p-2 inline-block" 
+          >
             View Details
           </a>
           {issue.media_url && <img src={issue.media_url} alt={issue.summary} />}
