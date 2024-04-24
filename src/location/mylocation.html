@@ -64,24 +64,21 @@ function displayRequests(latitude, longitude) {
       console.log("results ");
       console.log(results);
 
-      results.forEach(obj => {
+      results.forEach(item => {
 
         const introDiv = document.createElement('div');
         introDiv.innerHTML = `
-              <br><hr><h3>${obj.description}</h3>
-              ${obj.address}<br><br>
+              <br><hr><h3>${item.description}</h3>
+              ${item.address}<br><br>
            `;
         requestsDiv.appendChild(introDiv);
 
-        Object.keys(obj).forEach(key => {
+        Object.keys(item).forEach(key => {
            const requestDiv = document.createElement('div');
-
-           
-
-            if (obj[key] !== null) {
-                console.log(`${key} ${obj[key]}`);
-                requestDiv.innerHTML = `${key} ${obj[key]}`;
-                //requestsDiv.appendChild(`${key}: ${obj[key]}`);
+            if (item[key] !== null) {
+                console.log(`${key} ${item[key]}`);
+                requestDiv.innerHTML = `<b>${key}</b>&nbsp; ${item[key]}`;
+                //requestsDiv.appendChild(`${key}: ${item[key]}`);
                 requestsDiv.appendChild(requestDiv);
             }
         });
