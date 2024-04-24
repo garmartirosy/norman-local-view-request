@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/x-icon" href="../../img/logo/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 <title>Display Requests</title>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
 
@@ -12,10 +15,32 @@
 
 <a href="https://cors-anywhere.herokuapp.com/">Turn on your temporary for CORS passthrough</a><br><br>
 
+open311/v2 requires CORS passthrough, api/v2 does not.<br><br>
+See <a href="mylocation.html">My Location sample</a>
+
 <div id="requests"></div>
+
+TO DO:<br><br>
+
+Source: <a href="https://plainenglish.io/blog/how-to-use-axios-in-vanilla-javascript">Axios in vanilla javascript</a><br>
 
 <script>
 function displayRequests(latitude, longitude) {
+    let url = "https://reqres.in/api/users";
+    //url = `https://seeclickfix.com/open311/v2/requests.json?lat=${latitude}&long=${longitude}`;
+    //url = `https://seeclickfix.com/api/v2/issues?search[place_url]=${zipCode}&per_page=10`;
+    url = `https://seeclickfix.com/api/v2/issues?lat=${latitude}&long=${longitude}&per_page=10`;
+    alert(url)
+    axios
+    .get(url)
+    .then((response) => {
+      const results = response.data.issues;
+      console.log(`Results`, results);
+    })
+    .catch((error) => console.error(error));
+}
+
+function displayRequestsCorsAnywhere(latitude, longitude) {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Use your own proxy if available
     const url = `${proxyUrl}https://seeclickfix.com/open311/v2/requests.json?lat=${latitude}&long=${longitude}`;
     const xhr = new XMLHttpRequest();
