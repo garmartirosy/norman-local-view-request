@@ -66,8 +66,10 @@ function displayRequests(latitude, longitude) {
 
         const introDiv = document.createElement('div');
         introDiv.innerHTML = `
-              <br><hr><h3>${item.description}</h3>
-              ${item.address}<br><br>
+              <br><hr><h3>${item.summary}</h3>
+              ${item.description}<br>
+              ${item.address}<br>
+              <a href="${item.html_url}">View Details</a><br><br>
            `;
         requestsDiv.appendChild(introDiv);
 
